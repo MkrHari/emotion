@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>How Do You Feel Today?</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #07152f, #102a56);
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 40px;
+        }
+
+        .mood {
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .emoji {
+            font-size: 90px;
+            margin-bottom: 15px;
+        }
+
+        .mood-name {
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        .question {
+            font-size: 22px;
+            margin-top: 15px;
+            opacity: 0.9;
+        }
+
+        button {
+            border: none;
+            padding: 18px 40px;
+            font-size: 22px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            background: #00d9ff;
+            color: #07152f;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .shuffle {
+            animation: shake 0.15s infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>HOW DO YOU FEEL TODAY?</h1>
+
+    <div class="mood" id="mood">
+        <div class="emoji">🤔</div>
+        <div class="mood-name">TAP TO FIND OUT</div>
+        <div class="question">Let's see what mood you're in today!</div>
+    </div>
+
+    <button onclick="generateMood()">🎲 TAP TO REVEAL</button>
+
+</div>
+
+<script>
+
+const moods = [
+    {
+        emoji: "😄",
+        name: "HAPPY",
+        question: "What made you happy recently?"
+    },
+    {
+        emoji: "🤩",
+        name: "EXCITED",
+        question: "What are you excited about today?"
+    },
+    {
+        emoji: "😎",
+        name: "CONFIDENT",
+        question: "What are you confident about?"
+    },
+    {
+        emoji: "🔥",
+        name: "MOTIVATED",
+        question: "What are you ready to achieve?"
+    },
+    {
+        emoji: "⚡",
+        name: "ENERGETIC",
+        question: "What gives you energy?"
+    },
+    {
+        emoji: "😌",
+        name: "CALM",
+        question: "What helps you stay calm?"
+    },
+    {
+        emoji: "🥰",
+        name: "GRATEFUL",
+        question: "What are you grateful for today?"
+    },
+    {
+        emoji: "🧠",
+        name: "CURIOUS",
+        question: "What do you want to learn today?"
+    },
+    {
+        emoji: "💪",
+        name: "DETERMINED",
+        question: "What are you determined to accomplish?"
+    },
+    {
+        emoji: "😐",
+        name: "JUST OKAY",
+        question: "What could make today better?"
+    },
+    {
+        emoji: "😴",
+        name: "SLEEPY",
+        question: "How much coffee do you need?"
+    },
+    {
+        emoji: "🥱",
+        name: "TIRED",
+        question: "What would give you more energy?"
+    },
+    {
+        emoji: "😬",
+        name: "NERVOUS",
+        question: "What's making you nervous?"
+    },
+    {
+        emoji: "😶",
+        name: "QUIET",
+        question: "What are you thinking about?"
+    },
+    {
+        emoji: "😔",
+        name: "LOW",
+        question: "What could lift your mood today?"
+    },
+    {
+        emoji: "😤",
+        name: "FRUSTRATED",
+        question: "What's bothering you?"
+    },
+    {
+        emoji: "😂",
+        name: "READY TO HAVE FUN",
+        question: "Who is the funniest person here?"
+    },
+    {
+        emoji: "🚀",
+        name: "READY TO ROCK",
+        question: "Are you ready for the session?"
+    },
+    {
+        emoji: "🎯",
+        name: "FULLY FOCUSED",
+        question: "What do you want to take away today?"
+    },
+    {
+        emoji: "☕",
+        name: "NEED COFFEE",
+        question: "Coffee first or training first?"
+    }
+];
+
+function generateMood() {
+
+    const moodBox = document.getElementById("mood");
+
+    moodBox.classList.add("shuffle");
+
+    let count = 0;
+
+    const shuffle = setInterval(() => {
+
+        const randomMood =
+            moods[Math.floor(Math.random() * moods.length)];
+
+        moodBox.innerHTML = `
+            <div class="emoji">${randomMood.emoji}</div>
+            <div class="mood-name">${randomMood.name}</div>
+        `;
+
+        count++;
+
+        if (count >= 12) {
+
+            clearInterval(shuffle);
+
+            const finalMood =
+                moods[Math.floor(Math.random() * moods.length)];
+
+            moodBox.innerHTML = `
+                <div class="emoji">${finalMood.emoji}</div>
+                <div class="mood-name">${finalMood.name}</div>
+                <div class="question">${finalMood.question}</div>
+            `;
+
+            moodBox.classList.remove("shuffle");
+        }
+
+    }, 100);
+
+}
+
+</script>
+
+</body>
+</html>
